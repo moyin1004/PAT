@@ -21,3 +21,38 @@ A5 = 被5除后余4的数字中最大数字。
 N 11 2 N 9
 */
 
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int N, num, count1, count2;
+    count1 = count2 = 0;
+    int A[5] = {0};
+    cin >> N;
+    for(int i = 0; i < N; i++) {
+        cin >> num;
+        if(num % 5 == 0 && num % 2 == 0) A[0] += num;
+        else if(num % 5 == 1) {
+            A[1] = A[1] + num * pow(-1.0, count1);
+            count1++;
+        }
+        else if(num % 5 == 2) A[2]++;
+        else if(num % 5 == 3) {
+            A[3] += num;
+            count2++;
+        }
+        else if(num % 5 == 4)A[4] = max(A[4], num);
+    }
+    if(A[0] == 0) cout << 'N' << ' ';
+    else cout << A[0] << ' ';
+    if(count1 == 0) cout << 'N' << ' ';
+    else cout << A[1] << ' ';
+    if(A[2] == 0) cout << 'N' << ' ';
+    else cout << A[2] << ' ';
+    if(A[3] == 0) cout << 'N' << ' ';
+    else printf("%.1f ", (double)A[3] / count2); 
+    if(A[4] == 0) cout << 'N';
+    else cout << A[4];
+    return 0;
+}
